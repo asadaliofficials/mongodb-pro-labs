@@ -1,5 +1,5 @@
 import express from 'express';
-import { seedPosts, seedTodos } from './controller/seed.controller.js';
+import { seedPosts, seedProducts, seedTodos } from './controller/seed.controller.js';
 
 const app = express();
 
@@ -9,5 +9,6 @@ app.get('/', (req, res) => {
 
 app.get('/seed/posts', seedPosts);
 app.get('/seed/todos', seedTodos);
+app.get('/seed/products', seedProducts);
 
 export default app;

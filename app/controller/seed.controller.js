@@ -1,4 +1,5 @@
 import PostModel from '../model/post.model.js';
+import ProductModel from '../model/product.model.js';
 import TodoModel from '../model/todo.model.js';
 
 export const seedPosts = async (req, res) => {
@@ -30,6 +31,20 @@ export const seedTodos = async (req, res) => {
 			body: item.body,
 		}));
 		await TodoModel.insertMany(newData);
+
+		res.status(201).send('seeded successfully');
+	} catch (error) {
+		console.error('SEED ERROR:', error);
+		res.status(500).send(error);
+	}
+};
+export const seedProducts = async (req, res) => {
+	try {
+		const url = 'https://dummyjson.com/products';
+		const resp = await fetch(url);
+		const data = await resp.json();
+
+		await ProductModel.insertMany(data.products);
 
 		res.status(201).send('seeded successfully');
 	} catch (error) {
